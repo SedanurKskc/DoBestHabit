@@ -30,7 +30,7 @@ class AuthManager {
       return "Şifre en az bir büyük harf içermelidir.";
     }
     if (!RegExp(r"(?=.*\d)").hasMatch(password)) {
-      return "Şifre en az bir rakam içermelidirr.";
+      return "Şifre en az bir rakam içermelidir.";
     }
     return null;
   }
