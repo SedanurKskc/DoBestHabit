@@ -1,0 +1,47 @@
+name: dobesthabit
+description: DoBestHabit application that developed by Sedanur Kaşıkcı
+publish_to: "none"
+version: 1.0.0+1
+
+environment:
+  sdk: ">=3.0.5 <4.0.0"
+
+dependencies:
+  connectivity_plus: ^6.0.3
+  cupertino_icons: ^1.0.2
+  flutter:
+    sdk: flutter
+  flutter_calendar_carousel: ^2.4.2
+  flutter_launcher_icons: ^0.13.1
+  google_fonts: ^6.1.0
+  http: ^1.2.2
+  intl: ^0.18.1
+  logger: ^2.0.2+1
+  provider: ^6.1.1
+  shared_preferences: ^2.2.2
+  url_launcher: ^6.1.14
+  path_provider: ^2.0.1
+  pie_chart: ^5.4.0
+  flutter_local_notifications: ^15.0.0
+  firebase_core: ^2.24.2
+  firebase_auth: ^4.16.0
+  cloud_firestore: ^4.14.0
+  google_generative_ai: ^0.4.5
+  flutter_dotenv: ^5.1.0
+  flutter_gemini: ^2.0.5
+  dio: ^5.6.0
+  
+  
+
+
+
+dev_dependencies:
+  flutter_lints: ^4.0.0
+  flutter_test:
+    sdk: flutter
+  
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/images/
