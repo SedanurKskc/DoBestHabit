@@ -3,7 +3,7 @@ import 'package:dio/dio.dart';
 class GeminiService {
   final Dio _dio = Dio();
   final String _baseUrl = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent'; // Güncellenmiş API endpoint URL'si
-  final String _apikey = 'AIzaSyDlb_OqjXu34ohOCvWQVnXfqJo7-HL63k8'; // Gerçek API Key'inizi buraya ekleyin
+  final String _apikey = ''; // Gerçek API Key'inizi buraya ekleyin
 
  Future<String> getGeminiResponse(String query) async {
   try {
