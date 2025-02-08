@@ -9,5 +9,7 @@ class NavPath {
   static const progress = '/progress';
   static const motivation = '/motivation';
   static const gemini = '/gemini';
-
+  static const book = '/book';
+  static const profile = '/profile';
+  static const daily = '/daily';
 }

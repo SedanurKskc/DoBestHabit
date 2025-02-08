@@ -52,7 +52,7 @@ class _AppButtonState extends BaseState<AppButton> {
       case ButtonVariant.primary:
         return colorScheme.primary;
       case ButtonVariant.secondary:
-        return colorScheme.primary;
+        return colorScheme.background;
       case ButtonVariant.light:
         return colorScheme.surface;
       case ButtonVariant.disabled:
@@ -63,7 +63,7 @@ class _AppButtonState extends BaseState<AppButton> {
   Color get textColor {
     switch (widget.variant) {
       case ButtonVariant.primary:
-        return colorScheme.surface;
+        return colorScheme.onSurface;
       case ButtonVariant.secondary:
         return colorScheme.onSurface;
       case ButtonVariant.light:
@@ -101,7 +101,7 @@ class _AppButtonState extends BaseState<AppButton> {
           decoration: ShapeDecoration(
             color: color,
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(sizes.s8)),
+              borderRadius: BorderRadius.all(Radius.circular(sizes.s32)),
             ),
             shadows: [
               BoxShadow(

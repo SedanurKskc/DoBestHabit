@@ -1,8 +1,8 @@
-import 'package:dobesthabit/core/base/state/base_state.dart';
-import 'package:dobesthabit/core/base/view/base_view.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../civciv/appbar.dart';
+import '../../core/base/state/base_state.dart';
 import 'gemini_viewmodel.dart';
 import 'widgets/gemini_text.dart';
 
@@ -14,14 +14,14 @@ class GeminiView extends StatefulWidget {
 class _GeminiViewState extends BaseState<GeminiView> {
   final TextEditingController _messageController = TextEditingController();
   final ScrollController _scrollController = ScrollController();
-  final String collectionName = "habits"; // Kullanmak istediğin Firebase koleksiyon adı.
+  final String collectionName = "habits"; 
 
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (_) => GeminiViewmodel(),
       child: Scaffold(
-        appBar: CivcivAppBar(title: 'Gemini Sohbet'),
+        appBar: CivcivAppBar(title: 'ChatPofy'),
         body: Consumer<GeminiViewmodel>(
           builder: (context, viewModel, child) {
             return Padding(
@@ -32,39 +32,48 @@ class _GeminiViewState extends BaseState<GeminiView> {
               child: Column(
                 children: [
                   Expanded(
-                    child: ListView.builder(
-                      controller: _scrollController,
-                      itemCount: viewModel.messages.length,
-                      itemBuilder: (context, index) {
-                        final message = viewModel.messages[index];
-                        final isUserMessage = message.containsKey('user');
-                        final text = isUserMessage ? message['user'] : message['gemini'];
-                        final color = isUserMessage ? Colors.grey[300] : colorScheme.primary;
-                        final alignment = isUserMessage ? Alignment.centerRight : Alignment.centerLeft;
+                    child: Stack(
+                      children: [
+                        ListView.builder(
+                          controller: _scrollController,
+                          itemCount: viewModel.messages.length,
+                          itemBuilder: (context, index) {
+                            final message = viewModel.messages[index];
+                            final isUserMessage = message.containsKey('user');
+                            final text = isUserMessage ? message['user'] : message['gemini'];
+                            final color = isUserMessage ? Colors.grey[300] : colorScheme.primary;
+                            final alignment = isUserMessage ? Alignment.centerRight : Alignment.centerLeft;
 
-                        return Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 5.0, horizontal: 10.0),
-                          child: Align(
-                            alignment: alignment,
-                            child: Container(
-                              padding: const EdgeInsets.all(10.0),
-                              constraints: BoxConstraints(
-                                maxWidth: MediaQuery.of(context).size.width * 0.8, // Baloncuk genişliği
-                              ),
-                              decoration: BoxDecoration(
-                                color: color,
-                                borderRadius: BorderRadius.circular(8.0),
-                              ),
-                              child: RichText(
-                                text: TextSpan(
-                                  style: TextStyle(fontSize: 16.0, color: Colors.black), // Genel metin stili
-                                  children: TextParser.parseMessage(text ?? ""), // TextParser sınıfındaki parseMessage fonksiyonunu çağırıyoruz
+                            return Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 5.0, horizontal: 10.0),
+                              child: Align(
+                                alignment: alignment,
+                                child: Container(
+                                  padding: const EdgeInsets.all(10.0),
+                                  constraints: BoxConstraints(
+                                    maxWidth: MediaQuery.of(context).size.width * 0.8,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    color: color,
+                                    borderRadius: BorderRadius.circular(8.0),
+                                  ),
+                                  child: RichText(
+                                    text: TextSpan(
+                                      style: TextStyle(fontSize: 16.0, color: Colors.black),
+                                      children: TextParser.parseMessage(text ?? ""),
+                                    ),
+                                  ),
                                 ),
                               ),
-                            ),
+                            );
+                          },
+                        ),
+                        // CircularProgressIndicator Yükleme Durumu için Eklendi
+                        if (viewModel.isLoading)
+                          Center(
+                            child: CircularProgressIndicator(),
                           ),
-                        );
-                      },
+                      ],
                     ),
                   ),
                   Padding(

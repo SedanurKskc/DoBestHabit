@@ -1,7 +1,10 @@
 import 'dart:io' show Platform;
+import 'package:dobesthabit/product/book/book.view.dart';
 import 'package:dobesthabit/product/gemini/gemini_view.dart';
+import 'package:dobesthabit/product/profile/profile_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import '../../../product/daily/daily_view.dart';
 import '../../../product/habits/habits_view.dart';
 
 import '../../../product/home/home_view.dart';
@@ -37,6 +40,12 @@ class NavigationRoute {
         return normalNavigate( MotivationView());
       case NavPath.gemini:
         return normalNavigate( GeminiView());
+      case NavPath.book:
+        return normalNavigate( BookListPage());
+        case NavPath.profile:
+        return normalNavigate( ProfileView());
+        case NavPath.daily:
+        return normalNavigate( DailyView());
       default:
         return normalNavigate(NotFoundView());
     }

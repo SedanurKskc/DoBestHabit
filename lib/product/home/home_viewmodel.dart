@@ -1,4 +1,3 @@
-
 import '../../core/base/state/base_state.dart';
 import 'home_view.dart';
 

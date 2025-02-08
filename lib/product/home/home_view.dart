@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-
-
 import '../../core/base/view/base_view.dart';
 import '../../core/component/bottombar/bottombar.dart';
 import '../../core/modules/navigate/manager.dart';
@@ -9,7 +7,6 @@ import 'widgets/enum.dart';
 import 'widgets/item.dart';
 
 class HomeView extends StatefulWidget {
-  final String name = "Seda";
   HomeView({
     Key? key,
   }) : super(key: key);
@@ -29,7 +26,7 @@ class _HomeViewState extends HomeViewmodel {
             child: Align(
               alignment: Alignment.topLeft,
               child: Text(
-                "Merhaba ${widget.name},",
+                "Merhaba Seda,",
                 style: textTheme.headlineMedium!.copyWith(color: colorScheme.onPrimary),
               ),
             ),
@@ -71,16 +68,16 @@ class _HomeViewState extends HomeViewmodel {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       TypeItem(
-                        onTap: () => NavigationManager.instance.nav(path: ""),
+                        onTap: () => NavigationManager.instance.nav(path: NavPath.book),
                         title: "Kişisel Gelişim",
                         type: ContainerSize.medium,
                         imagePath: "assets/images/personality.png",
                       ),
                       TypeItem(
-                        onTap: () => NavigationManager.instance.nav(path: ""),
-                        title: "Besin Değeri",
+                        onTap: () => NavigationManager.instance.nav(path: NavPath.daily),
+                        title: "Günlüğüm",
                         type: ContainerSize.medium,
-                        imagePath: "assets/images/food.png",
+                        imagePath: "assets/images/daily.png",
                       ),
                     ],
                   ),

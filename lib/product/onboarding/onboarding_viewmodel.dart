@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../../core/base/state/base_state.dart';
-
 import '../../core/modules/memory/prefs/prefs_manager.dart';
 import '../../core/modules/navigate/manager.dart';
 import 'onboarding_view.dart';

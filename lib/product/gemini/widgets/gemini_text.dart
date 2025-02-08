@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 class TextParser {
-  // Metni belirli desenlere göre parçalayan ve her parçaya uygun stil uygulayan statik fonksiyon.
   static List<TextSpan> parseMessage(String text) {
     final boldPattern = RegExp(r'\* \*\*.*?(?=\n|$)');
     final italicPattern = RegExp(r'\*.*?(?=\n|$)');

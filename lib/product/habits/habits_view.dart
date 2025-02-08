@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-
-
-
 import 'package:provider/provider.dart';
 import '../../civciv/appbar.dart';
 import '../../core/base/state/base_state.dart';
@@ -22,7 +19,7 @@ class _HabitsViewState extends BaseState<HabitsView> {
   void initState() {
     super.initState();
     viewmodel = Provider.of<HabitsViewmodel>(context, listen: false);
-   // viewmodel.initialize(context);
+  
   }
   @override
   Widget build(BuildContext context) {

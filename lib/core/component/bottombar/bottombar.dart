@@ -1,6 +1,7 @@
 // ignore_for_file: require_enabled_experimental_language_features
 
 import 'package:dobesthabit/product/gemini/gemini_view.dart';
+import 'package:dobesthabit/product/profile/profile_view.dart';
 import 'package:flutter/material.dart';
 
 
@@ -18,7 +19,7 @@ class _CustomBottomBarState extends State<CustomBottomBar> {
   final List<Map<String, dynamic>> icons = [
     {"title": "Home", "icon": Icons.home, "widget": HomeView()},
     {"title": "AI", "icon": Icons.chat, "widget": GeminiView()},
-    {"title": "Profil", "icon": Icons.person, "widget": Container()},
+    {"title": "Profil", "icon": Icons.person, "widget": ProfileView()},
   ];
 
   int selectedIndex = 0;

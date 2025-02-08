@@ -134,8 +134,8 @@ class OnboardingInfo {
 
 class OnboardingData {
   List<OnboardingInfo> items = [
-    OnboardingInfo(header: "NextHabit'e\nHoş Geldiniz", description: "NextHabit ile daha güzel bir yaşam tarzına\nadım atın.", image: "assets/images/dailyRoutine.png"),
-    OnboardingInfo(header: "NextHabit ile\nyeni alışkanlıklar", description: "Yeni alışkanlıkları keşfedin ve günlük rutininizi kolayca iyileştirin.", image: "assets/images/habit1.png"),
+    OnboardingInfo(header: "DoBestHabit'e\nHoş Geldiniz", description: "DoBestHabit ile daha güzel bir yaşam tarzına\nadım atın.", image: "assets/images/hobbies.png"),
+    OnboardingInfo(header: "DoBestHabit ile\nyeni alışkanlıklar", description: "Yeni alışkanlıkları keşfedin ve günlük rutininizi kolayca iyileştirin.", image: "assets/images/dailyRoutine.png"),
     OnboardingInfo(header: "Alışkanlıklarınızı yönetin", description: "Alışkanlıklarınızı kolayca takip edebilir ve yönetebilirsiniz.", image: "assets/images/shedule.png")
   ];
 }

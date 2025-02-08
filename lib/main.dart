@@ -4,7 +4,6 @@ import 'package:dobesthabit/product/habits/habits_viewmodel.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:provider/provider.dart';
 import 'core/base/util/color.dart';
@@ -29,7 +28,7 @@ Future<void> main() async {
         ChangeNotifierProvider(create: (_) => CheckedHabitsProvider()),
         ChangeNotifierProvider(create: (_) => HabitsViewmodel()),
         ChangeNotifierProvider(create: (_)=> GeminiViewmodel()),
-        Provider(create: (_) => AuthManager()), // AuthManager'i sağlayıcı olarak ekledik
+        Provider(create: (_) => AuthManager()),
       ],
       child: DoBestHabit(),
     ),
@@ -43,7 +42,7 @@ class DoBestHabit extends StatelessWidget {
     prepareSystem();
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: "NextHabit",
+      title: "DoBestHabit",
       theme: Provider.of<ThemeNotifier>(context, listen: true).currentTheme,
       navigatorKey: NavigationManager.instance.navigatorKey,
       onGenerateRoute: NavigationRoute.instance.generateRoute,

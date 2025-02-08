@@ -31,7 +31,7 @@ class _AuthViewState extends AuthViewmodel {
                     child: Column(
                       children: [
                         Text(
-                          "NextHabit",
+                          "DoBestHabit",
                           style: textTheme.headlineLarge!.copyWith(color: colorScheme.primary),
                         ),
                         SizedBox(

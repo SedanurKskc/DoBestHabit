@@ -1,11 +1,9 @@
-
 import 'package:provider/provider.dart';
 import '../../core/base/state/base_state.dart';
 import '../habits/widgets/checkedHabits_provider.dart';
 import 'progress_view.dart';
 
 abstract class ProgressViewmodel extends BaseState<ProgressView> {
-  
   double _calculatePercentage(String category, bool isCompleted) {
     final checkedHabits = context.watch<CheckedHabitsProvider>().checkedHabits[category] ?? {};
     final total = checkedHabits.length;

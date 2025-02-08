@@ -13,10 +13,8 @@ class PieChartWidget extends StatefulWidget {
 }
 
 class _PieChartWidgetState extends BaseState<PieChartWidget> {
-
   @override
   Widget build(BuildContext context) {
-     // dataMap her build çağrısında güncelleniyor.
     final dataMap = {
       "Tamamlanan": widget.completedPercentage,
       "Tamamlanmayan": widget.uncompletedPercentage,

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../modules/firebase/fireabase.dart';
+import '../../modules/firebase/firebase.dart';
 import '../../modules/gemini/gemini_service.dart';
 
 class GeminiViewmodel extends ChangeNotifier {
@@ -9,16 +9,14 @@ class GeminiViewmodel extends ChangeNotifier {
 
   String _response = '';
   bool _isLoading = false;
-  List<Map<String, dynamic>> _firebaseData = []; // Firebase'den alınan verileri tutar
-  List<Map<String, String>> _messages = []; // Kullanıcı ve API mesajlarını tutar
-
-  // Getter metodları
+  List<Map<String, dynamic>> _firebaseData = [];
+  List<Map<String, String>> _messages = []; 
   bool get isLoading => _isLoading;
   String get response => _response;
   List<Map<String, dynamic>> get firebaseData => _firebaseData;
   List<Map<String, String>> get messages => _messages;
 
-  // Firebase'den veri çeken metod
+
   Future<void> fetchFirebaseData(String collection) async {
     _isLoading = true;
     notifyListeners();
@@ -44,63 +42,59 @@ class GeminiViewmodel extends ChangeNotifier {
     notifyListeners();
   }
 
-Future<void> fetchGeminiResponse(String query) async {
-  _isLoading = true;
-  notifyListeners();
-
-  try {
-    final response = await _geminiService.getGeminiResponse(query);
-    
-    // Kullanıcının mesajını ekle
-    _messages.add({'user': query});
-    
-    // Yanıtı kontrol edip ekle
-    if (response != 'Yanıt bulunamadı') {
-      _messages.add({'gemini': response});
-    } else {
-      _messages.add({'gemini': 'Yanıt bulunamadı. Lütfen tekrar deneyin.'});
+  Future<void> fetchGeminiResponse(String query) async {
+    if (query.isNotEmpty) {
+      // Kullanıcının mesajını hemen ekle
+      if (!_messages.any((msg) => msg.containsValue(query))) {
+        _messages.add({'user': query});
+        notifyListeners(); // Mesajı hemen göstermek için
+      }
     }
-  } catch (e) {
-    _messages.add({'gemini': 'Bir hata oluştu: $e'});
-  } finally {
-    _isLoading = false;
+
+    _isLoading = true;
+    notifyListeners(); 
+
+    try {
+      if (query.toLowerCase().contains('alışkanlık öner')) {
+        await fetchRecommendations('habits', query);
+      } else {
+        final response = await _geminiService.getGeminiResponse(query);
+        if (response != 'Yanıt bulunamadı') {
+          _messages.add({'gemini': response});
+        } else {
+          _messages.add({'gemini': 'Yanıt bulunamadı. Lütfen tekrar deneyin.'});
+        }
+      }
+    } catch (e) {
+      _messages.add({'gemini': 'Bir hata oluştu: $e'});
+    } finally {
+      _isLoading = false;
+      notifyListeners();
+    }
+  }
+
+
+  Future<void> fetchAndQuery(String collection, String query) async {
+    await fetchFirebaseData(collection);
+    await fetchGeminiResponse(query);
+  }
+  Future<void> fetchRecommendations(String collection, String query) async {
+    await fetchFirebaseData(collection);
+    String generatedQuery = _generateQueryFromFirebaseData(_firebaseData);
+    final response = await _geminiService.getGeminiResponse(generatedQuery);
+
+    if (!_messages.any((msg) => msg.containsValue(query))) {
+      _messages.add({'user': query});
+    }
+    _messages.add({'gemini': response});
     notifyListeners();
   }
-}
 
-
-
-  // Firebase'den veri çekip ardından Gemini API'ye sorgu gönderen fonksiyon
-  Future<void> fetchAndQuery(String collection, String query) async {
-    await fetchFirebaseData(collection); // Firebase'den veriyi çeker
-    await fetchGeminiResponse(query); // Gemini API'ye sorgu gönderir
+  String _generateQueryFromFirebaseData(List<Map<String, dynamic>> data) {
+    if (data.isEmpty) {
+      return "Veritabanında hiç alışkanlık bulunamadı.";
+    }
+    final habits = data.map((item) => item['habit'] ?? 'No habit').toList();
+    return "Bana bu alışkanlıklara benzer yeni alışkanlıklar öner: ${habits.join(', ')}.";
   }
-
-
-Future<void> fetchRecommendations(String collection, String query) async {
-  await fetchFirebaseData(collection);
-
-  // Firebase'den alınan verilere göre sorgu oluştur (artık query parametresini kullanmıyor)
-  String generatedQuery = _generateQueryFromFirebaseData(_firebaseData);
-
-  // Öneri için sorguyu Gemini API'ye gönder
-  final response = await _geminiService.getGeminiResponse(generatedQuery);
-
-  // Kullanıcı mesajını ve öneriyi ekle
-  _messages.add({'user': query});
-  _messages.add({'gemini': response});
-}
-
-
-
-
-// Firebase'den alınan verilere dayalı sorgu oluşturma (ekranda göstermeden arka planda kullanma)
-String _generateQueryFromFirebaseData(List<Map<String, dynamic>> data) {
-  final habits = data.map((item) => item['habit'] ?? 'No habit').toList();
-  
-  // Kullanıcıdan ek bilgi istemeyen bir sorgu oluştur
-  return "Bana yeni alışkanlıklar öner.";
-}
-
-
 }

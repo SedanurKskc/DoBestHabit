@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import '../../modules/habits/habits_model.dart'; // Veri sağlayıcılarınıza göre değiştirin
+import '../../modules/habits/habits_model.dart'; 
 
 class HabitsViewmodel extends ChangeNotifier {
   late Future<void> initFuture;
@@ -14,11 +14,10 @@ class HabitsViewmodel extends ChangeNotifier {
 
   Future<void> initialize() async {
     try {
-      // Verileri çek ve listeye ekle
       dailyHabits = await fetchDailyHabits();
       weeklyHabits = await fetchWeeklyHabits();
       monthlyHabits = await fetchMonthlyHabits();
-      notifyListeners(); // Veriler güncellendiğinde UI'ı bilgilendirin
+      notifyListeners(); 
     } catch (e) {
       print('Initialization error: $e');
     }

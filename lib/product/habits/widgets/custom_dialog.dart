@@ -26,11 +26,13 @@ class _CustomDialogState extends BaseState<CustomDialog> {
       selectedDate = date;
     });
   }
+
   void onMinuteSelected(int minute) {
     setState(() {
       selectedMinute = minute;
     });
   }
+
   void onHourSelected(int hour) {
     setState(() {
       selectedHour = hour;
@@ -42,8 +44,8 @@ class _CustomDialogState extends BaseState<CustomDialog> {
     final category = _dropdownController.text;
 
     if (newHabit.isNotEmpty && category.isNotEmpty) {
-       // Firestore için UID oluşturma
-    final String uid = FirebaseFirestore.instance.collection('habits').doc().id;
+      // Firestore için UID oluşturma
+      final String uid = FirebaseFirestore.instance.collection('habits').doc().id;
       final habit = HabitsModel(
         habit: newHabit,
         category: category,
@@ -51,8 +53,8 @@ class _CustomDialogState extends BaseState<CustomDialog> {
         timeHour: selectedHour,
         timeMinute: selectedMinute,
       );
-    // Kategoriye göre Firestore ekleme (isteğe bağlı)
-     FirebaseFirestore.instance.collection('habits').add(habit.toMap());
+      // Kategoriye göre Firestore ekleme (isteğe bağlı)
+      FirebaseFirestore.instance.collection('habits').add(habit.toMap());
       Navigator.of(context).pop();
     } else {
       showDialog(

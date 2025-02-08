@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dobesthabit/modules/habits/habits_model.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-
 import 'package:provider/provider.dart';
 import '../../../core/base/state/base_state.dart';
 import '../../../modules/habits/habits_manager.dart';
@@ -100,7 +99,7 @@ class _HabitListViewState extends BaseState<HabitListView> {
                               SizedBox(height: sizes.s10),
                               InkWell(
                                 onTap: () {
-                                  context.read<HabitsModelManager>().deleteHabit(habit.id); // Silme işlemi
+                                  context.read<HabitsModelManager>().deleteHabit(habit.id); 
                                 },
                                 child: Container(
                                   decoration: BoxDecoration(

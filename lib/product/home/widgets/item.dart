@@ -2,8 +2,6 @@ import 'package:dobesthabit/product/home/widgets/enum.dart';
 import 'package:flutter/material.dart';
 import '../../../core/base/state/base_state.dart';
 
-
-
 class TypeItem extends BaseStateless {
   TypeItem({
     Key? key,

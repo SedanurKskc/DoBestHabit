@@ -7,7 +7,7 @@ class HabitsModel {
   DateTime? date;
   int? timeHour;
   int? timeMinute;
-  bool? isCompleted; // Tamamlanma durumu ekleniyor
+  bool? isCompleted; 
 
   HabitsModel({
     this.id,
@@ -16,7 +16,7 @@ class HabitsModel {
     required this.date,
      required this.timeHour,
      required this.timeMinute,
-    this.isCompleted = false, // Varsayılan değer olarak false
+    this.isCompleted = false, 
   });
 
   // Firestore'dan veri almak için
@@ -30,7 +30,7 @@ class HabitsModel {
       date: (data['date'] as Timestamp).toDate(),
       timeHour: data['timeHour'] ?? 0,
       timeMinute: data['timeMinute'] ?? 0,
-        isCompleted: data['isCompleted'] ?? false, // Varsayılan değer olarak false
+        isCompleted: data['isCompleted'] ?? false, 
     );
   }
 
@@ -43,7 +43,7 @@ class HabitsModel {
       'date': date!=null? Timestamp.fromDate(date!):null,
       'timeHour': timeHour,
       'timeMinute': timeMinute,
-      'isCompleted': isCompleted??false, // Tamamlanma durumu ekleniyor
+      'isCompleted': isCompleted??false,
     };
   }
 }
